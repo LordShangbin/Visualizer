@@ -123,7 +123,7 @@ public:
         box_size = 100;
         box_dist = 30;
         font_size = 40;
-        screen_width = 100 + (range_length.j * (box_size + box_dist)); 
+        screen_width = 150 + (range_length.j * (box_size + box_dist)); 
         screen_height = 200 + (range_length.i * (box_size + box_dist));
         InitWindow(screen_width, screen_height, "Double Dimension DP Visualizer");
         SetTargetFPS(60); 
@@ -141,10 +141,10 @@ public:
             ClearBackground(RAYWHITE);
             //Calculate Position
             for (int j = 0; j < range_length.j; j++) {
-                pos_x[j] = 65.0f + ((box_size + box_dist) * j);
+                pos_x[j] = 90.0f + ((box_size + box_dist) * j);
             }
             for (int i = 0; i < range_length.i; i++) {
-                pos_y[i] = 50.0f + ((box_size + box_dist) * i);
+                pos_y[i] = 75.0f + ((box_size + box_dist) * i);
             }
             //Draw Blue Box (Default)
             for (int i = 0; i < range_length.i; i++) {
@@ -170,9 +170,15 @@ public:
                 Color color = { 207, 159, 255, 255 }; //Light Violet
                 DrawRectangleRounded({pos_x[j], pos_y[i], box_size, box_size}, 0.2, 6, color);
             }
+            // Y axis label
+            for (int i = 0; i < range_length.i; i++) {
+                int true_i = i + start_i;
+                DrawTextEx(Arial, TextFormat("%d", true_i), {30, pos_y[i] + box_size/2 - 10}, 30, 3, DARKGRAY);
+            }
+            // X axis label
             for (int j = 0; j < range_length.j; j++) {
                 int true_j = j + start_j;
-                DrawTextEx(Arial, TextFormat("%d", true_j), {pos_x[j] + box_size/2 - 10,  100}, 10, 3, DARKGRAY);
+                DrawTextEx(Arial, TextFormat("%d", true_j), {pos_x[j] + box_size/2 - 10,  30}, 30, 3, DARKGRAY);
             }
             for (int i = 0; i < range_length.i; i++) {
                 for (int j = 0; j < range_length.j; j++) {
@@ -183,6 +189,10 @@ public:
                     int textWidth = MeasureText(val.c_str(), new_font_size);
                     DrawTextEx(Arial, val.c_str(), {pos_x[j] + (box_size/2 - textWidth/2), pos_y[i] + (box_size/3)}, new_font_size, 5, BLACK);
                 }
+            }
+            //Draw Description
+            if (!Description.empty()) {
+                DrawTextEx(Arial, Description.c_str(), {75, (float)screen_height - 120}, 50, 5, DARKGRAY);
             }
             DrawTextEx(Arial, "Press SPACE for next step", {20, (float)screen_height - 30}, 20, 5, GRAY);
             EndDrawing();
