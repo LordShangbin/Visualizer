@@ -1,12 +1,13 @@
-#include <bits/stdc++.h>
-#include "Visualizer.cpp"
+#include <vector>
+#include <Visualizer.h>
+
 using namespace std;
 
 const int maxn = 1005, modnum = 1e9 + 7;
 int n, m;
 
 int main(){
-    cin.tie(nullptr)->sync_with_stdio(0);
+    cin.tie(0)->sync_with_stdio(0);
     cin >> n >> m;
     vector<vector<int>> dp(n+1, vector<int>(m+1)); // Define dp (Vector only)
     init(dp, {1, n+1}, {1, m+1}); //Init --> (dp, printing_range_i, printing_range_j)
