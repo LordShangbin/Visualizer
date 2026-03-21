@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
+#include <vector>
 #include <thread>
-#include "Visualizer.cpp"
+#include <Visualizer.h>
 
 using namespace std;
 #define ll long long
@@ -9,7 +9,7 @@ const int maxn = 100;
 int n, x;
 
 int main(){
-    cin.tie(nullptr)->sync_with_stdio(0);
+    cin.tie(0)->sync_with_stdio(0);
     cin >> n;
     vector<int> dp(n);
     init(dp, {0, dp.size()});
